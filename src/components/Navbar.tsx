@@ -20,9 +20,9 @@ const Navbar = () => {
             <button className="text-gray-600 hover:text-primary">
               <MessageSquare className="w-6 h-6" />
             </button>
-            <button className="text-gray-600 hover:text-primary">
+            <Link to="/profile" className="text-gray-600 hover:text-primary">
               <User className="w-6 h-6" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
