@@ -1,12 +1,22 @@
-import { Home, Bell, MessageSquare, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Home, Bell, MessageSquare, User, Settings, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useToast } from "@/components/ui/use-toast";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  
   const notifications = [
     {
       id: 1,
@@ -27,6 +37,14 @@ const Navbar = () => {
       isRead: true,
     },
   ];
+
+  const handleLogout = () => {
+    toast({
+      title: "تم تسجيل الخروج",
+      description: "نراك قريباً!",
+    });
+    navigate("/login");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
@@ -73,9 +91,26 @@ const Navbar = () => {
             <button className="text-gray-600 hover:text-primary">
               <MessageSquare className="w-6 h-6" />
             </button>
-            <Link to="/profile" className="text-gray-600 hover:text-primary">
-              <User className="w-6 h-6" />
-            </Link>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-gray-600 hover:text-primary">
+                <User className="w-6 h-6" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate("/profile")}>
+                  <User className="ml-2 h-4 w-4" />
+                  <span>الملف الشخصي</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/settings")}>
+                  <Settings className="ml-2 h-4 w-4" />
+                  <span>الإعدادات</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="ml-2 h-4 w-4" />
+                  <span>تسجيل الخروج</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
