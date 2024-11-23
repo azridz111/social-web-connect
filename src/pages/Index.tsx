@@ -24,21 +24,27 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F6F7F9]">
       <Navbar />
-      
-      <div className="container mx-auto pt-20 px-4">
+      <div className="container mx-auto pt-24 px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2">
-            <CreatePost />
-            {posts.map((post) => (
-              <Post key={post.id} {...post} />
-            ))}
+          <div className="md:col-span-2 space-y-6">
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <CreatePost />
+            </div>
+            <div className="space-y-6">
+              {posts.map((post) => (
+                <div key={post.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <Post {...post} />
+                </div>
+              ))}
+            </div>
           </div>
-          
           <div className="hidden md:block">
-            <div className="sticky top-20">
-              <SideBar />
+            <div className="sticky top-24">
+              <div className="bg-white rounded-xl shadow-sm">
+                <SideBar />
+              </div>
             </div>
           </div>
         </div>
